@@ -1,13 +1,7 @@
-class ReactionEquation:
-    class Molecule:
-        def __init__(self) -> None:
-            self.elements = []
-            self.number = None
+import reaction_equation
 
-        def append_element(name, number):
-            self.elements.append((name, number))
-
-
-    def __init__(self) -> None:
-        self.reactants = []
-        self.products = []
+def stoich_calculator(equation: str) -> str:
+    # Convert equation to a ReactionEquation object
+    # Call the solver to produce a solved ReactionEquation
+    # Convert the solved ReactionEquation to a string & return
+    pass
