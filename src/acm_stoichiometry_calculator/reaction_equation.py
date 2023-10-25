@@ -1,10 +1,15 @@
 class ReactionEquation:
     class Molecule:
-        def __init__(self) -> None:
+        def __init__(self, name) -> None:
+            self.name = name
             self.elements = []
             self.number = None
 
         def append_element(self, name, number):
+            if number == '':
+                number = '1'
+            if number is str:
+                number = int(number)
             self.elements.append((name, number))
 
     def __init__(self, e_string: str) -> None:
@@ -21,29 +26,27 @@ class ReactionEquation:
         for molecule in molecules:
             element = ''
             number = ''
-            side.append(self.Molecule())
+            side.append(self.Molecule(molecule))
             for c in molecule:
                 if c.isupper() and len(element) != 0:
-                    if number == '':
-                        number = '1'
-                    side[-1].append_element(element, int(number))
+                    side[-1].append_element(element, number)
                     element = ''
                     number = ''
                 if c.isalpha():
                     element += c
                 elif c.isdigit():
                     number += c
-            if number == '':
-                number = '1'
-            side[-1].append_element(element, int(number))
+            side[-1].append_element(element, number)
         return side
 
 
 if __name__ == "__main__":
-    # TODO: Interpret "Al(NO3)3 + NaOH → Al(OH)3 + NaNO3"
+    # TODO: Interpret "Al(NO3)3 + NaOH = Al(OH)3 + NaNO3 -> AlN3O9 + NaOH = AlO3H3 + NaNO3"
     eq = ReactionEquation('PCl5 + H2O = H3PO4 + HCl')
     for mol in eq.reactants:
+        print(mol.name)
         print(mol.elements)
     print('=')
     for mol in eq.products:
+        print(mol.name)
         print(mol.elements)
